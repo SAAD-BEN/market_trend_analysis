@@ -1,4 +1,3 @@
 pycountry
 pandas
 geopy
-spacy

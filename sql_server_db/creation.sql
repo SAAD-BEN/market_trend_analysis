@@ -9,7 +9,7 @@ CREATE TABLE Job_posts (
     Location_id int NOT NULL,
     Job_Type VARCHAR(50) NOT NULL CHECK (Job_Type IN ('Full_Time', 'Internship', 'Part_Time')),
     Experience_level VARCHAR(50) NOT NULL CHECK (Experience_level IN ('Entry-level', 'Senior-level', 'Mid-level', 'Not-Specified', 'Executive-level')),
-    Salary_in_1000_USD INT NOT NULL,
+    Salary_in_1000_USD FLOAT NOT NULL,
     Negotiable BIT NOT NULL,
     Asterisk BIT NOT NULL,
     Job_category VARCHAR(50) NOT NULL CHECK (Job_category IN ('Data_Science', 'Artificial_Intelligence', 'Big_Data', 'Other')),
