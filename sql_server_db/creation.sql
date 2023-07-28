@@ -5,7 +5,6 @@ BEGIN TRANSACTION QUICKDBD
 CREATE TABLE Job_posts (
     Id INT NOT NULL,
     Company_id int NOT NULL,
-    Job_Title VARCHAR(1000) NOT NULL,
     Location_id int NOT NULL,
     Job_Type VARCHAR(50) NOT NULL CHECK (Job_Type IN ('Full_Time', 'Internship', 'Part_Time')),
     Experience_level VARCHAR(50) NOT NULL CHECK (Experience_level IN ('Entry-level', 'Senior-level', 'Mid-level', 'Not-Specified', 'Executive-level')),
@@ -57,6 +56,14 @@ CREATE TABLE Facilities (
     )
 )
 
+CREATE TABLE Job_Titles (
+    Id int  NOT NULL ,
+    Name VARCHAR(1000)  NOT NULL ,
+    CONSTRAINT PK_Job_Title PRIMARY KEY CLUSTERED (
+        Id ASC
+    )
+)
+
 CREATE TABLE Requirment_of_the_job (
     Job_id int  NOT NULL ,
     Requirment_of_the_company_id int  NOT NULL 
@@ -65,6 +72,11 @@ CREATE TABLE Requirment_of_the_job (
 CREATE TABLE Facilities_of_the_job (
     Job_id int  NOT NULL ,
     Facilitie_id int  NOT NULL 
+)
+
+CREATE TABLE Job_Titles_of_the_job (
+    Job_id int  NOT NULL ,
+    Job_Post_id int  NOT NULL 
 )
 
 ALTER TABLE Job_posts WITH CHECK ADD CONSTRAINT FK_Job_posts_Company_id FOREIGN KEY(Company_id)
@@ -102,5 +114,10 @@ ALTER TABLE Facilities_of_the_job WITH CHECK ADD CONSTRAINT FK_Facilities_of_the
 REFERENCES Facilities (Id)
 
 ALTER TABLE Facilities_of_the_job CHECK CONSTRAINT FK_Facilities_of_the_job_Facilitie_id
+
+ALTER TABLE Job_Titles_of_the_job WITH CHECK ADD CONSTRAINT FK_Job_Titles_of_the_job_Job_id FOREIGN KEY(Job_id)
+REFERENCES Job_posts (Id)
+
+ALTER TABLE Job_Titles_of_the_job CHECK CONSTRAINT FK_Job_Titles_of_the_job_Job_id
 
 COMMIT TRANSACTION QUICKDBD
